@@ -331,7 +331,7 @@ function loadTable(viewModel, text) {
     if (!viewModel._tableDataSource.dataset.hasLocationData()) {
         console.log('No locaton date found in csv file - trying to match based on region');
 
-        var promise = addRegionMap(viewModel)
+        var promise = addRegionMap(viewModel);
         if (promise) {
             viewModel.regionMapped = true;
         }
