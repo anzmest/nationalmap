@@ -28,7 +28,7 @@ var WebMapServiceItemViewModel = require('./WebMapServiceItemViewModel');
  * @param {ApplicationViewModel} application The application.
  */
 var CkanGroupViewModel = function(application) {
-    CatalogGroupViewModel.call(this, application, 'ckan');
+    CatalogGroupViewModel.call(this, application);
 
     /**
      * Gets or sets the URL of the CKAN server.  This property is observable.
@@ -145,8 +145,6 @@ CkanGroupViewModel.defaultSerializers.items = function(viewModel, json, property
 
     return result;
 };
-
-CkanGroupViewModel.defaultSerializers.isLoading = function(viewModel, json, propertyName, options) {};
 
 freezeObject(CkanGroupViewModel.defaultSerializers);
 

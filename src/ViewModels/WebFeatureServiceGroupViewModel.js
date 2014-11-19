@@ -26,7 +26,7 @@ var WebFeatureServiceItemViewModel = require('./WebFeatureServiceItemViewModel')
  * @param {ApplicationViewModel} application The application.
  */
 var WebFeatureServiceGroupViewModel = function(application) {
-    CatalogGroupViewModel.call(this, application, 'wfs-getCapabilities');
+    CatalogGroupViewModel.call(this, application);
 
     /**
      * Gets or sets the URL of the WFS server.  This property is observable.
@@ -109,8 +109,6 @@ WebFeatureServiceGroupViewModel.defaultSerializers.items = function(viewModel, j
     options.enabledItemsOnly = previousEnabledItemsOnly;
     options.serializeForSharing = previousSerializeForSharing;
 };
-
-WebFeatureServiceGroupViewModel.defaultSerializers.isLoading = function(viewModel, json, propertyName, options) {};
 
 freezeObject(WebFeatureServiceGroupViewModel.defaultSerializers);
 

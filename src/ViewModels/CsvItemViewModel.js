@@ -121,10 +121,10 @@ CsvItemViewModel.prototype._load = function() {
         return when(that.data, function(data) {
             if (data instanceof Blob) {
                 return readText(data).then(function(text) {
-                    loadTable(that, text);
+                    return loadTable(that, text);
                 });
-            } else if (data instanceof String) {
-                loadTable(that, data);
+            } else if (typeof data === 'string') {
+                return loadTable(that, data);
             } else {
                 throw new ViewModelError({
                     sender: that,
@@ -139,7 +139,7 @@ If you believe it is a bug in National Map, please report it by emailing \
         });
     } else if (defined(that.url)) {
         return loadText(proxyUrl(that, that.url)).then(function(text) {
-            loadTable(that, text);
+            return loadTable(that, text);
         }).otherwise(function(e) {
             throw new ViewModelError({
                 sender: that,
@@ -330,7 +330,9 @@ function loadTable(viewModel, text) {
 
     if (!viewModel._tableDataSource.dataset.hasLocationData()) {
         console.log('No locaton date found in csv file - trying to match based on region');
-        if (addRegionMap(viewModel)) {
+
+        var promise = addRegionMap(viewModel)
+        if (promise) {
             viewModel.regionMapped = true;
         }
         else {
@@ -342,6 +344,7 @@ Could not find any location parameters for latitude and longitude and was not ab
 a region mapping column.'
             });
         }
+        return promise;
     }
     else {
         viewModel.clock = viewModel._tableDataSource.clock;
@@ -453,7 +456,7 @@ function loadRegionIDs(description, succeed, fail) {
     var url = regionServer + '?service=wfs&version=2.0&request=getPropertyValue';
     url += '&typenames=' + description.name;
     url += '&valueReference=' + description.regionProp;
-    loadText(url).then(function (text) { 
+    return loadText(url).then(function (text) { 
         var obj = $.xml2json(text);
 
         if (!defined(obj.member)) {
@@ -547,10 +550,11 @@ function setRegionVariable(viewModel, regionVar, regionType) {
     };
 
     if (!defined(description.idMap)) {
-        loadRegionIDs(description, succeed, fail);
+        return loadRegionIDs(description, succeed, fail);
     }
     else {
         succeed();
+        return true;
     }
 }
 
@@ -610,9 +614,7 @@ function addRegionMap(viewModel) {
     
     //TODO: figure out how sharing works or doesn't
     
-    setRegionVariable(viewModel, viewModel.style.table.region, viewModel.style.table.regionType);
-
-    return true;
+    return setRegionVariable(viewModel, viewModel.style.table.region, viewModel.style.table.regionType);
 }
 
 

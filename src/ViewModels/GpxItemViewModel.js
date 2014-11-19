@@ -22,7 +22,7 @@ var loadText = require('../../third_party/cesium/Source/Core/loadText');
  *
  * @alias GpxItemViewModel
  * @constructor
- * @extends GeoJsonItemViewModel
+ * @extends CatalogItemViewModel
  * 
  * @param {ApplicationViewModel} application The application.
  * @param {String} [url] The URL from which to retrieve the GPX data.

@@ -2,6 +2,8 @@
 
 /*global require*/
 
+var AbsIttGroupViewModel = require('./AbsIttGroupViewModel');
+var AbsIttItemViewModel = require('./AbsIttItemViewModel');
 var ArcGisMapServerItemViewModel = require('./ArcGisMapServerItemViewModel');
 var CkanGroupViewModel = require('./CkanGroupViewModel');
 var createCatalogMemberFromType = require('./createCatalogMemberFromType');
@@ -19,6 +21,8 @@ var GpxItemViewModel = require('./GpxItemViewModel');
 var OgrItemViewModel = require('./OgrItemViewModel');
 
 var registerCatalogViewModels = function() {
+    createCatalogMemberFromType.register('abs-itt', AbsIttItemViewModel);
+    createCatalogMemberFromType.register('abs-itt-by-concept', AbsIttGroupViewModel);
     createCatalogMemberFromType.register('ckan', CkanGroupViewModel);
     createCatalogMemberFromType.register('csv', CsvItemViewModel);
     createCatalogMemberFromType.register('czml', CzmlItemViewModel);

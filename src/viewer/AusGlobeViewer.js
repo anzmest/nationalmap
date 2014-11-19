@@ -554,7 +554,7 @@ AusGlobeViewer.prototype._createCesiumViewer = function(container) {
         baseLayerPicker: false,
         navigationHelpButton: false,
         fullscreenButton : false,
-        terrainProvider : terrainProvider,
+        //terrainProvider : terrainProvider,
         imageryProvider : new BingMapsImageryProvider({
             url : '//dev.virtualearth.net',
             mapStyle : BingMapsStyle.AERIAL_WITH_LABELS

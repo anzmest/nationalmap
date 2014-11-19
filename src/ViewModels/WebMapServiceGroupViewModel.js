@@ -27,7 +27,7 @@ var WebMapServiceItemViewModel = require('./WebMapServiceItemViewModel');
  * @param {ApplicationViewModel} application The application.
  */
 var WebMapServiceGroupViewModel = function(application) {
-    CatalogGroupViewModel.call(this, application, 'wms-getCapabilities');
+    CatalogGroupViewModel.call(this, application);
 
     /**
      * Gets or sets the URL of the WMS server.  This property is observable.
@@ -112,8 +112,6 @@ WebMapServiceGroupViewModel.defaultSerializers.items = function(viewModel, json,
 
     return result;
 };
-
-WebMapServiceGroupViewModel.defaultSerializers.isLoading = function(viewModel, json, propertyName, options) {};
 
 freezeObject(WebMapServiceGroupViewModel.defaultSerializers);
 

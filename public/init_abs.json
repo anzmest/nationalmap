@@ -1,0 +1,158 @@
+{
+    "catalog": [
+        {
+            "name": "Australian Bureau of Statistics",
+            "type": "group",
+            "items": [
+                {
+                    "name": "Type of educational institution",
+                    "type": "abs-itt-by-concept",
+                    "url": "http://stat.abs.gov.au/itt/query.jsp",
+                    "dataSetID": "ABS_CENSUS2011_B15",
+                    "regionType": "SA4",
+                    "filter": [
+                        "MEASURE.3"
+                    ],
+                    "queryConcept": "TYPP"
+                },
+                {
+                    "name": "Total personal income",
+                    "type": "abs-itt-by-concept",
+                    "url": "http://stat.abs.gov.au/itt/query.jsp",
+                    "dataSetID": "ABS_CENSUS2011_B17",
+                    "regionType": "SA4",
+                    "filter": [
+                        "INCP.TOT",
+                        "SEX.3"
+                    ],
+                    "queryConcept": "MEASURE"
+                },
+                {
+                    "name": "Voluntary work",
+                    "type": "abs-itt-by-concept",
+                    "url": "http://stat.abs.gov.au/itt/query.jsp",
+                    "dataSetID": "ABS_CENSUS2011_B19",
+                    "regionType": "SA4",
+                    "filter": [
+                        "MEASURE.3",
+                        "VOLWP.TOT"
+                    ],
+                    "queryConcept": "AGE"
+                },
+                {
+                    "name": "Unpaid domestic work",
+                    "type": "abs-itt-by-concept",
+                    "url": "http://stat.abs.gov.au/itt/query.jsp",
+                    "dataSetID": "ABS_CENSUS2011_B20",
+                    "regionType": "SA4",
+                    "filter": [
+                        "AGE.O15",
+                        "MEASURE.3"
+                    ],
+                    "queryConcept": "DOMP"
+                },
+                {
+                    "name": "Unpaid assistance to a person with a disability",
+                    "type": "abs-itt-by-concept",
+                    "url": "http://stat.abs.gov.au/itt/query.jsp",
+                    "dataSetID": "ABS_CENSUS2011_B21",
+                    "regionType": "SA4",
+                    "filter": [
+                        "AGE.O15",
+                        "MEASURE.3"
+                    ],
+                    "queryConcept": "UNCAREP"
+                },
+                {
+                    "name": "Unpaid child care",
+                    "type": "abs-itt-by-concept",
+                    "url": "http://stat.abs.gov.au/itt/query.jsp",
+                    "dataSetID": "ABS_CENSUS2011_B22",
+                    "regionType": "SA4",
+                    "filter": [
+                        "AGE.O15",
+                        "SEX.3"
+                    ],
+                    "queryConcept": "MEASURE"
+                },
+                {
+                    "name": "Family composition",
+                    "type": "abs-itt-by-concept",
+                    "url": "http://stat.abs.gov.au/itt/query.jsp",
+                    "dataSetID": "ABS_CENSUS2011_B25",
+                    "regionType": "SA4",
+                    "filter": [
+                        "MEASURE.F"
+                    ],
+                    "queryConcept": "FMCF"
+                },
+                {
+                    "name": "Total household income (weekly)",
+                    "type": "abs-itt-by-concept",
+                    "url": "http://stat.abs.gov.au/itt/query.jsp",
+                    "dataSetID": "ABS_CENSUS2011_B28",
+                    "regionType": "SA4",
+                    "filter": [
+                        "MEASURE.TOT"
+                    ],
+                    "queryConcept": "HIND"
+                },
+                {
+                    "name": "Total family household income (weekly)",
+                    "type": "abs-itt-by-concept",
+                    "url": "http://stat.abs.gov.au/itt/query.jsp",
+                    "dataSetID": "ABS_CENSUS2011_B28",
+                    "regionType": "SA4",
+                    "filter": [
+                        "MEASURE.1_2"
+                    ],
+                    "queryConcept": "HIND"
+                },
+                {
+                    "name": "Total non-family household income (weekly)",
+                    "type": "abs-itt-by-concept",
+                    "url": "http://stat.abs.gov.au/itt/query.jsp",
+                    "dataSetID": "ABS_CENSUS2011_B28",
+                    "regionType": "SA4",
+                    "filter": [
+                        "MEASURE.3"
+                    ],
+                    "queryConcept": "HIND"
+                },
+                {
+                    "name": "Dwelling structure",
+                    "type": "abs-itt-by-concept",
+                    "url": "http://stat.abs.gov.au/itt/query.jsp",
+                    "dataSetID": "ABS_CENSUS2011_B31",
+                    "regionType": "SA4",
+                    "filter": [
+                        "MEASURE.D"
+                    ],
+                    "queryConcept": "STRD"
+                },
+                {
+                    "name": "Mortgage repayment (monthly)",
+                    "type": "abs-itt-by-concept",
+                    "url": "http://stat.abs.gov.au/itt/query.jsp",
+                    "dataSetID": "ABS_CENSUS2011_B33",
+                    "regionType": "SA4",
+                    "filter": [
+                        "MEASURE.OPD"
+                    ],
+                    "queryConcept": "MRERD"
+                },
+                {
+                    "name": "Rent (weekly)",
+                    "type": "abs-itt-by-concept",
+                    "url": "http://stat.abs.gov.au/itt/query.jsp",
+                    "dataSetID": "ABS_CENSUS2011_B34",
+                    "regionType": "SA4",
+                    "filter": [
+                        "MEASURE.TOT"
+                    ],
+                    "queryConcept": "RNTRD"
+                }
+            ]
+        }
+    ]
+}
