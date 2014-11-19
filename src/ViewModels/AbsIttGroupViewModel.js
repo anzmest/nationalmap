@@ -58,7 +58,7 @@ var AbsIttGroupViewModel = function(application) {
      * (or equivalent) and a list of the possible values for a concept by querying
      * http://stat.abs.gov.au/itt/query.jsp?method=GetCodeListValue&datasetid=ABS_CENSUS2011_B25&concept=MEASURE&format=json.
      * This property is observable.
-     * @type {Array}
+     * @type {String[]}
      */
     this.filter = [];
 
@@ -67,7 +67,7 @@ var AbsIttGroupViewModel = function(application) {
      * You can obtain a list of all available concepts for a dataset by querying
      * http://stat.abs.gov.au/itt/query.jsp?method=GetDatasetConcepts&datasetid=ABS_CENSUS2011_B25
      * (or equivalent).  This property is observable.
-     * @type {[type]}
+     * @type {String}
      */
     this.queryConcept = undefined;
 
