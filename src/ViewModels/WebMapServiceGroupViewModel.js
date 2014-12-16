@@ -271,7 +271,14 @@ function createWmsDataSource(viewModel, layer, supportsJsonGetFeatureInfo, dataC
     }
 
     if (defined(crs)) {
-        if (crsIsMatch(crs, 'EPSG:4326')) {
+        if (crsIsMatch(crs, 'EPSG:3857')) {
+            // Standard Web Mercator
+            result.tilingScheme = new WebMercatorTilingScheme();
+        } else if (crsIsMatch(crs, 'EPSG:900913')) {
+            // Older code for Web Mercator
+            result.tilingScheme = new WebMercatorTilingScheme();
+            result.parameters = {srs: 'EPSG:900913'};
+        } else if (crsIsMatch(crs, 'EPSG:4326')) {
             // Standard Geographic
         } else if (crsIsMatch(crs, 'CRS:84')) {
             // Another name for EPSG:4326
@@ -279,14 +286,7 @@ function createWmsDataSource(viewModel, layer, supportsJsonGetFeatureInfo, dataC
         } else if (crsIsMatch(crs, 'EPSG:4283')) {
             // Australian system that is equivalent to EPSG:4326.
             result.parameters = {srs: 'EPSG:4283'};
-        } else if (crsIsMatch(crs, 'EPSG:3857')) {
-            // Standard Web Mercator
-            result.tilingScheme = new WebMercatorTilingScheme();
-        } else if (crsIsMatch(crs, 'EPSG:900913')) {
-            // Older code for Web Mercator
-            result.tilingScheme = new WebMercatorTilingScheme();
-            result.parameters = {srs: 'EPSG:900913'};
-        } else {
+        } else  {
             // No known supported CRS listed.  Try the default, EPSG:4326, and hope for the best.
         }
     }

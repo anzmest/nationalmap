@@ -270,7 +270,7 @@ WebMapServiceItemViewModel.prototype._enableInCesium = function() {
         getFeatureInfoAsGeoJson : this.getFeatureInfoAsGeoJson,
         getFeatureInfoAsXml : this.getFeatureInfoAsXml,
         parameters : combine(this.parameters, WebMapServiceItemViewModel.defaultParameters),
-        tilingScheme : this.tilingScheme
+        tilingScheme : this.tilingScheme === undefined ? new WebMercatorTilingScheme() : this.tilingScheme
     });
 
     this._imageryLayer = new ImageryLayer(imageryProvider, {
@@ -311,6 +311,28 @@ WebMapServiceItemViewModel.prototype._enableInLeaflet = function() {
     options = combine(defaultValue(this.parameters, WebMapServiceItemViewModel.defaultParameters), options);
 
     this._imageryLayer = new L.tileLayer.wms(cleanAndProxyUrl(this.application, this.url), options);
+
+    //modify the leaflet url so that it is exactly the same as the cesium version for better caching
+    if (true) {
+        this._imageryLayer.getTileUrlOrig = this._imageryLayer.getTileUrl;
+        var cesiumUrl = 'geoserver.research.nicta.com.au/geotopo_250k/ows?transparent=true&format=image%2Fpng&exceptions=path&styles=&tiled=true&service=WMS&version=1.1.1&request=GetMap&layers=temp&srs=EPSG%3A3857&bbox=values&width=256&height=256';
+        var cesiumUri = new URI(cesiumUrl);
+        this._imageryLayer.cesiumParams = cesiumUri.search(true);
+        var that = this;
+        this._imageryLayer.getTileUrl = function(coords) {
+            var url = that._imageryLayer.getTileUrlOrig(coords);
+            var uri = new URI(url);
+            var params = uri.search(true);
+            var newParams = that._imageryLayer.cesiumParams;
+            for (var p in params) {
+                if (params.hasOwnProperty p) {
+                    newParams[p.toLowerCase()] = params[p];
+                }
+            }
+            uri.query(URI.buildQuery(newParams, true));
+            return uri.toString();
+        }
+    }
 };
 
 WebMapServiceItemViewModel.prototype._disableInLeaflet = function() {
