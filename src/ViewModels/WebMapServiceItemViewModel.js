@@ -314,7 +314,7 @@ WebMapServiceItemViewModel.prototype._enableInLeaflet = function() {
     //modify the leaflet url so that it is exactly the same as the cesium version for better caching
     if (true) {
         this._imageryLayer.getTileUrlOrig = this._imageryLayer.getTileUrl;
-        var cesiumUrl = 'geoserver.research.nicta.com.au/geotopo_250k/ows?transparent=true&format=image%2Fpng&exceptions=path&styles=&tiled=true&service=WMS&version=1.1.1&request=GetMap&layers=temp&srs=EPSG%3A3857&bbox=values&width=256&height=256';
+        var cesiumUrl = 'https://programs.communications.gov.au/geoserver/ows?tiled=true&transparent=true&format=image%2Fpng&exceptions=application%2Fvnd.ogc.se_xml&styles=&service=WMS&version=1.1.1&request=GetMap&layers=MyBroadband_ADSL_Quality_no_outline&srs=EPSG%3A4326&bbox=-90%2C0%2C0%2C90&width=256&height=256';
         var cesiumUri = new URI(cesiumUrl);
         this._imageryLayer.cesiumParams = cesiumUri.search(true);
         var that = this;
