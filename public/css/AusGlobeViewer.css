@@ -1,24 +1,15 @@
-html {
-    height: 100%;
-}
-
-body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    overflow: hidden;
-    padding: 0;
-    background: #000;
-    font-size:12px;
-    font-family: "Open Sans", sans-serif;
-}
 
 a {
     text-decoration: none;
 }
 
-a:hover {
-    text-decoration: underline;
+.nationalmap-container {
+		position: relative;
+}
+
+.cesium-container {
+		position: relative;
+		top: 60px;
 }
 
 .fullWindow {
@@ -66,8 +57,7 @@ a:hover {
 .navigation-controls {
     position: absolute;
     bottom: 20px;
-    right: 20px;
-    
+    right: 30px;
     font-size: 9.5pt;
     padding: 0px;
     color: #444;
@@ -146,13 +136,11 @@ li {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100%; 
     height: 60px;
     background-color: rgba(0, 0, 0, 0.65);
-    border: 1px solid gray;
     vertical-align: middle;
     z-index: 999; /* required for IE9 */
-    padding-left: 10px;
 }
 
 .ausglobe-title-area:before {
@@ -164,7 +152,6 @@ li {
 }
 
 .ausglobe-title-middle {
-    display: inline-block;
     position: absolute;
     font-weight: 400;
     font-size: 12px;
@@ -257,7 +244,7 @@ a.ausglobe-title-menuItem:hover {
 }
 
 .ausglobe-title-credits {
-    position: absolute;
+    position: absolute; 
     font-weight: 400;
     font-size: 7.5pt;
     color: #fff;
@@ -282,7 +269,7 @@ a.ausglobe-title-menuItem:hover {
     position: absolute;
     left: 20px;
     width: 360px;
-    top: 144px;
+    top: 120px;
     bottom: 80px;
     pointer-events: none;
     z-index: 999; /* required for IE9 */
@@ -571,7 +558,7 @@ a.ausglobe-title-menuItem:hover {
 .ausglobe-search-form {
     position: absolute;
     display: inline-block;
-    top: 80px;
+    top: 70px;
     left: 20px;
     z-index: 999; /* required for IE9 */
     background-color: rgba(0, 0, 0, 0.65);

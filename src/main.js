@@ -6,6 +6,7 @@ var start = true;
 
 var PopupMessage = require('./viewer/PopupMessage');
 var FeatureDetection = require('../third_party/cesium/Source/Core/FeatureDetection');
+var WebMapServiceItemViewModel = require('./ViewModels/WebMapServiceItemViewModel');
 
 // If we're not in a normal browser environment (Web Worker maybe?), do nothing.
 if (typeof window === 'undefined') {
@@ -34,7 +35,10 @@ if (start) {
         };
     }
 
-    window.CESIUM_BASE_URL = 'build/Cesium/';
+		var prefix = "../../apps/nationalmap/public/";
+    window.CESIUM_BASE_URL = prefix + 'build/Cesium/';
+    window.NATIONALMAP_URL = prefix;
+		window.ga = function() {}; // f'ing google analytics - avoid.....
 
     var copyright = require('./CopyrightModule'); // jshint ignore:line
 
@@ -44,7 +48,7 @@ if (start) {
     var AusGlobeViewer = require('./viewer/AusGlobeViewer');
     var ApplicationViewModel = require('./ViewModels/ApplicationViewModel');
     var KnockoutSanitizedHtmlBinding = require('./viewer/KnockoutSanitizedHtmlBinding');
-    var raiseErrorToUser = require('./ViewModels/raiseErrorToUser');
+    //var raiseErrorToUser = require('./ViewModels/raiseErrorToUser');
     var registerCatalogViewModels = require('./ViewModels/registerCatalogViewModels');
 
     SvgPathBindingHandler.register(knockout);
@@ -52,6 +56,15 @@ if (start) {
     registerCatalogViewModels();
 
     var application = new ApplicationViewModel();
+
+		// prepare some global objects for other apps to use
+		window.nmObjects = {
+			nmApplicationViewModel: application,
+			viewModels: {
+				wmsItemViewModel: WebMapServiceItemViewModel
+			}
+		};
+
     application.catalog.isLoading = true;
 
     application.error.addEventListener(function(e) {
@@ -64,11 +77,12 @@ if (start) {
 
     application.start({
         applicationUrl: window.location,
-        configUrl: 'config.json',
-        initializationUrl: 'init_nm.json',
+        configUrl: '../../apps/nationalmap/public/config.json',
+        initializationUrl: '../../apps/nationalmap/public/init_nm.json',
         useUrlHashAsInitSource: true
     }).otherwise(function(e) {
-        raiseErrorToUser(application, e);
+        //raiseErrorToUser(application, e);
+				console.log(e);
     }).always(function() {
         // Watch the hash portion of the URL.  If it changes, try to interpret as an init source.
         window.addEventListener("hashchange", function() {

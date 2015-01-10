@@ -30,7 +30,6 @@ var EllipsoidTerrainProvider = require('../../third_party/cesium/Source/Core/Ell
 var FeatureDetection = require('../../third_party/cesium/Source/Core/FeatureDetection');
 var EventHelper = require('../../third_party/cesium/Source/Core/EventHelper');
 var Rectangle = require('../../third_party/cesium/Source/Core/Rectangle');
-var Fullscreen = require('../../third_party/cesium/Source/Core/Fullscreen');
 var InfoBox = require('../../third_party/cesium/Source/Widgets/InfoBox/InfoBox');
 var Intersections2D = require('../../third_party/cesium/Source/Core/Intersections2D');
 var JulianDate = require('../../third_party/cesium/Source/Core/JulianDate');
@@ -72,6 +71,8 @@ var TitleWidget = require('./TitleWidget');
 var LeafletVisualizer = require('../Map/LeafletVisualizer');
 var ViewerMode = require('../ViewModels/ViewerMode');
 
+var getElement = require('../../third_party/cesium/Source/Widgets/getElement');
+
 //use our own bing maps key
 BingMapsApi.defaultKey = undefined;
 
@@ -87,23 +88,8 @@ var AusGlobeViewer = function(application) {
     this.captureCanvasCallback = function(dataUrl) { console.log('callback unset'); };
 
     var titleWidget = new TitleWidget({
-        container : document.body,
+        container : getElement('nationalmapContainer'),
         menuItems : [
-            {
-                svg : {
-                    path : 'M 30.1,5.5 H 1.9 C 1.2376,5.5 0.7,6.0376 0.7,6.7 v 18.6 c 0,0.6624 0.5376,1.2 1.2,1.2 h 28.2 c 0.6624,0 1.2,-0.5376 1.2,-1.2 V 6.7 c 0,-0.6624 -0.537,-1.2 -1.2,-1.2 z m -12,18 c 0,0.6624 -0.5376,1.2 -1.2,1.2 H 3.7 c -0.6624,0 -1.2,-0.5376 -1.2,-1.2 v -7.2 c 0,-0.6624 0.5376,-1.2 1.2,-1.2 h 13.2 c 0.6624,0 1.2,0.5376 1.2,1.2 v 7.2 z',
-                    width : 32,
-                    height : 32
-                },
-                tooltip : 'Fullscreen',
-                callback : function() {
-                    if (Fullscreen.fullscreen) {
-                        Fullscreen.exitFullscreen();
-                    } else {
-                        Fullscreen.requestFullscreen(document.body);
-                    }
-                }
-            },
             {
                 svg : {
                     path : 'm 22.6786,19.8535 c -0.8256,0 -1.5918,0.2514 -2.229,0.6822 l -7.1958,-4.1694 c 0.0198,-0.1638 0.0492,-0.3252 0.0492,-0.4944 0,-0.2934 -0.0366,-0.5778 -0.096,-0.8532 l 6.9978,-3.7554 c 0.6816,0.5442 1.5342,0.8844 2.4738,0.8844 2.199,0 3.9822,-1.7832 3.9822,-3.9822 0,-2.199 -1.7832,-3.9816 -3.9822,-3.9816 -2.199,0 -3.9816,1.7826 -3.9816,3.9816 0,0.1434 0.0276,0.279 0.042,0.4188 l -7.2198,3.9702 c -0.6306,-0.4182 -1.3854,-0.6648 -2.1978,-0.6648 -2.1996,0 -3.9822,1.7826 -3.9822,3.9822 0,2.1984 1.7826,3.9816 3.9822,3.9816 0.906,0 1.731,-0.3144 2.4,-0.8238 l 7.0398,4.1628 c -0.0342,0.2106 -0.0642,0.4224 -0.0642,0.642 0,2.199 1.7826,3.9816 3.9816,3.9816 2.199,0 3.9822,-1.7826 3.9822,-3.9816 -6e-4,-2.1984 -1.7832,-3.981 -3.9822,-3.981 z',
@@ -226,16 +212,17 @@ var AusGlobeViewer = function(application) {
 
     this._titleWidget = titleWidget;
 
-    this._navigationWidget = new NavigationWidget(this, document.body);
+    this._navigationWidget = new NavigationWidget(this, getElement('nationalmapContainer'));
 
     this._searchWidget = new SearchWidget({
-        container : document.body,
+        container : getElement('nationalmapContainer'),
         viewer : this
     });
 
+    var container = getElement('nationalmapContainer');
     var leftArea = document.createElement('div');
     leftArea.className = 'ausglobe-left-area';
-    document.body.appendChild(leftArea);
+    container.appendChild(leftArea);
 
     var url = window.location;
     var uri = new URI(url);
