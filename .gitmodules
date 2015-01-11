@@ -1,3 +1,4 @@
 [submodule "public/cesium"]
 	path = third_party/cesium
 	url = https://github.com/anzmest/cesium.git
+	branch = nm
