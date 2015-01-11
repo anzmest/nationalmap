@@ -14,6 +14,7 @@ var loadWithXhr = require('../../third_party/cesium/Source/Core/loadWithXhr');
 var Rectangle = require('../../third_party/cesium/Source/Core/Rectangle');
 var throttleRequestByServer = require('../../third_party/cesium/Source/Core/throttleRequestByServer');
 var TileMapServiceImageryProvider = require('../../third_party/cesium/Source/Scene/TileMapServiceImageryProvider');
+var WebMapServiceImageryProvider = require('../../third_party/cesium/Source/Scene/WebMapServiceImageryProvider');
 var WebMercatorTilingScheme = require('../../third_party/cesium/Source/Core/WebMercatorTilingScheme');
 
 var corsProxy = require('../Core/corsProxy');
@@ -325,6 +326,25 @@ and the file will not be uploaded or added to the map.')) {
             url : 'http://www.ga.gov.au/gis/rest/services/topography/AusHydro_WM/MapServer',
             proxy : corsProxy
         }), 1));
+    });
+
+    this._activateGNBlueMarble = createCommand(function() {
+        ga('send', 'event', 'mapSettings', 'switchImagery', 'GN Blue Marble');
+
+        if (!that._viewer.isCesium()) {
+            var message = 'This imagery layer is not yet supported in 2D mode.';
+            alert(message);
+            return;
+        }
+        
+        removeBaseLayer();
+
+        var imageryLayers = that._viewer.scene.globe.imageryLayers;
+        currentBaseLayers.push(imageryLayers.addImageryProvider(new WebMapServiceImageryProvider({
+						layers: 'gn:world,gn:ne_50m_boundary_da,gn:ne_50m_boundary_lines_land,gn:ne_50m_coastline',
+            url : '//localhost:8080/geoserver/ows',
+            credit : '© NASA'
+        }), 0));
     });
 
     this._selectFileToUpload = createCommand(function() {
@@ -663,6 +683,12 @@ defineProperties(GeoDataBrowserViewModel.prototype, {
     activateNasaBlackMarble : {
         get : function() {
             return this._activateNasaBlackMarble;
+        }
+    },
+
+    activateGNBlueMarble : {
+        get : function() {
+            return this._activateGNBlueMarble;
         }
     },
 
