@@ -3,6 +3,7 @@
         "nicta.com.au",
         "gov.au",
         "arcgis.com"
-    ]
+    ],
+		"proxyHost" :  "http://localhost:3001"
 }
 

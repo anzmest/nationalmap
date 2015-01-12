@@ -57,7 +57,7 @@ if (start) {
 
     var application = new ApplicationViewModel();
 
-		// prepare some global objects for other apps to use
+		// prepare some global view model objects for other apps to use, in this case geonetwork
 		window.nmObjects = {
 			nmApplicationViewModel: application,
 			viewModels: {

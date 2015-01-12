@@ -4,14 +4,19 @@
 
 var defined = require('../../third_party/cesium/Source/Core/defined');
 
+var corsProxyHost = '';
+
 var corsProxy = {
     getURL : function(resource, proxyFlag) {
         var flag = (proxyFlag === undefined) ? '' : '_' + proxyFlag + '/';
-        return '/proxy/' + flag + resource;
+        return corsProxyHost + '/proxy/' + flag + resource;
     },
     proxyDomains : [],
     corsDomains : [],
-    alwaysUseProxy : false
+    alwaysUseProxy : false,
+		setProxyHost : function(proxyHost) {
+			corsProxyHost = proxyHost;
+		}
 };
 
 corsProxy.shouldUseProxy = function(url) {
