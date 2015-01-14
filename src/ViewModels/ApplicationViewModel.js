@@ -15,6 +15,7 @@ var when = require('../../third_party/cesium/Source/ThirdParty/when');
 
 var CatalogViewModel = require('./CatalogViewModel');
 var corsProxy = require('../Core/corsProxy');
+var appProxy = require('../Core/appProxy');
 var NowViewingViewModel = require('./NowViewingViewModel');
 var ServicesViewModel = require('./ServicesViewModel');
 var ViewerMode = require('./ViewerMode');
@@ -75,6 +76,12 @@ var ApplicationViewModel = function() {
      * @type {corsProxy}
      */
     this.corsProxy = corsProxy;
+
+    /**
+     * Gets or sets the {@link appProxy} used to set the proxy info on a URL when nationalmap is embedded in an app.
+     * @type {appProxy}
+     */
+    this.appProxy = appProxy;
 
     /**
      * Gets or sets properties related to the Cesium globe.  If the application is in 2D mode, this property will be
@@ -151,7 +158,8 @@ ApplicationViewModel.prototype.start = function(options) {
     var that = this;
     return loadJson(options.configUrl).then(function(config) {
         corsProxy.proxyDomains.push.apply(corsProxy.proxyDomains, config.proxyDomains);
-				corsProxy.setProxyHost(config.proxyHost);
+				corsProxy.setProxyHost(config.corsProxyHost);
+				appProxy.setProxyHost(config.proxyHost);
 
         if (defined(options.initializationUrl)) {
             that.initSources.push(options.initializationUrl);

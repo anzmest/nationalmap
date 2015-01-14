@@ -13,6 +13,7 @@ var Rectangle = require('../../third_party/cesium/Source/Core/Rectangle');
 var when = require('../../third_party/cesium/Source/ThirdParty/when');
 
 var corsProxy = require('../Core/corsProxy');
+var appProxy = require('../Core/appProxy');
 var ViewModelError = require('./ViewModelError');
 var CatalogGroupViewModel = require('./CatalogGroupViewModel');
 var inherit = require('../Core/inherit');
@@ -240,7 +241,9 @@ function filterResultsByGetCapabilities(viewModel, json) {
             var getCapabilitiesUrl = wmsServer + '?service=WMS&request=GetCapabilities';
             if (corsProxy.shouldUseProxy(getCapabilitiesUrl)) {
                 getCapabilitiesUrl = corsProxy.getURL(getCapabilitiesUrl, '1d');
-            }
+            } else {
+								getCapabilitiesUrl = appProxy.getURL(getCapabilitiesUrl, '1d');
+						}
 
             promises.push(filterBasedOnGetCapabilities(viewModel, getCapabilitiesUrl, wmsServers[wmsServer]));
         }
@@ -405,9 +408,10 @@ function cleanAndProxyUrl(application, url) {
     var cleanedUrl = uri.toString();
     if (defined(application.corsProxy) && application.corsProxy.shouldUseProxy(cleanedUrl)) {
         cleanedUrl = application.corsProxy.getURL(cleanedUrl, '1d');
-    }
+				return cleanedUrl;
+    } 
 
-    return cleanedUrl;
+    return application.appProxy.getURL(cleanedUrl);
 }
 
 module.exports = CkanGroupViewModel;

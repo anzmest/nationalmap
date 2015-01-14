@@ -191,7 +191,9 @@ function cleanAndProxyUrl(application, url) {
     var cleanedUrl = uri.toString();
     if (defined(application.corsProxy) && application.corsProxy.shouldUseProxy(cleanedUrl)) {
         cleanedUrl = application.corsProxy.getURL(cleanedUrl, '1d');
-    }
+    } else {
+    		cleanedUrl = application.appProxy.getURL(cleanedUrl);
+		}
 
     return cleanedUrl;
 }

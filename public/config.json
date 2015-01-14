@@ -4,6 +4,7 @@
         "gov.au",
         "arcgis.com"
     ],
-		"proxyHost" :  "http://localhost:3001"
+		"corsProxyHost" :  "http://localhost:3001",
+		"proxyHost" :  "http://localhost:8080/geonetwork/proxy/"
 }
 

@@ -132,7 +132,7 @@ function proxyUrl(application, url) {
         return application.corsProxy.getURL(url);
     }
 
-    return url;
+    return application.appProxy.getURL(url);
 }
 
 module.exports = ArcGisMapServerItemViewModel;

@@ -293,7 +293,7 @@ function proxyUrl(application, url) {
         return application.corsProxy.getURL(url);
     }
 
-    return url;
+    return application.appProxy.getUrl(url);
 }
 
 module.exports = WebFeatureServiceItemViewModel;
