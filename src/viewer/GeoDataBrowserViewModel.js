@@ -331,7 +331,7 @@ and the file will not be uploaded or added to the map.')) {
     this._activateGNBlueMarble = createCommand(function() {
         ga('send', 'event', 'mapSettings', 'switchImagery', 'GN Blue Marble');
 
-        if (!that._viewer.isCesium()) {
+        if (!that._viewer.isCesium()) { // really?
             var message = 'This imagery layer is not yet supported in 2D mode.';
             alert(message);
             return;

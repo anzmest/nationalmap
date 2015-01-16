@@ -8,6 +8,7 @@
 /*global require,L,URI,$,Document,html2canvas,console,ga*/
 
 var BingMapsApi = require('../../third_party/cesium/Source/Core/BingMapsApi');
+var WebMapServiceImageryProvider = require('../../third_party/cesium/Source/Scene/WebMapServiceImageryProvider');
 var BingMapsImageryProvider = require('../../third_party/cesium/Source/Scene/BingMapsImageryProvider');
 var BingMapsStyle = require('../../third_party/cesium/Source/Scene/BingMapsStyle');
 var CameraFlightPath = require('../../third_party/cesium/Source/Scene/CameraFlightPath');
@@ -529,11 +530,43 @@ AusGlobeViewer.prototype._enableSelectExtent = function(bActive) {
 AusGlobeViewer.prototype._createCesiumViewer = function(container) {
 
     var that = this;
-    
-    var terrainProvider = new CesiumTerrainProvider({
-            url : '//cesiumjs.org/stk-terrain/tilesets/world/tiles'
-        });
+ 
+ 		// set terrain provider from nm config
+		var tp = this.application.nmConfig.terrainProvider;
+		var tOptions;
+		if (tp) {
+	 		tOptions = this.application.nmConfig.terrainProvider.options;
+		}
 
+		if (!tOptions) { // use default
+			tOptions = {
+            url : '//cesiumjs.org/stk-terrain/tilesets/world/tiles'
+			};
+			console.log("WARNING: Couldn't find terrainProvider options in config, using "+tOptions.url);
+		}
+    var terrainProvider = new CesiumTerrainProvider(tOptions);
+
+		// set baseLayer from nm config
+		var baseLayer = this.application.nmConfig.baseLayer;
+		var imageryProvider;
+
+		if (baseLayer.type === "wms" && baseLayer.options) {
+        imageryProvider = new WebMapServiceImageryProvider(baseLayer.options);
+		} else if (baseLayer.type === "bing" && baseLayer.options) {
+				var opts = baseLayer.options;
+				opts.mapStyle = BingMapsStyle.AERIAL_WITH_LABELS;
+        imageryProvider = new BingMapsImageryProvider(opts);
+		} // should be more eg. OSM
+
+		if (!imageryProvider) {
+			imageryProvider = new WebMapServiceImageryProvider({
+			    layers: 'gn:world,gn:ne_50m_boundary_da,gn:ne_50m_boundary_lines_land,gn:ne_50m_coastline',
+					url : '//localhost:8080/geoserver/ows'
+			});
+			console.log("WARNING: Couldn't find imageryProvider options in config, using GeoNetwork geoserver blue marble");
+		}
+
+		// set viewer options
     var options = {
         dataSources: this.application.dataSources,
         clock: this.application.clock,
@@ -545,10 +578,7 @@ AusGlobeViewer.prototype._createCesiumViewer = function(container) {
         navigationHelpButton: false,
         fullscreenButton : false,
         terrainProvider : terrainProvider,
-        imageryProvider : new BingMapsImageryProvider({
-            url : '//dev.virtualearth.net',
-            mapStyle : BingMapsStyle.AERIAL_WITH_LABELS
-        }),
+        imageryProvider : imageryProvider,
         timeControlsInitiallyVisible : false,
         targetFrameRate : 40
     };

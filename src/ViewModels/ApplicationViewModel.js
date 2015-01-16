@@ -134,8 +134,6 @@ var ApplicationViewModel = function() {
 
     knockout.track(this, ['viewerMode', 'initialBoundingBox']);
 
-    // IE versions prior to 10 don't support CORS, so always use the proxy.
-    corsProxy.alwaysUseProxy = FeatureDetection.isInternetExplorer() ? (FeatureDetection.internetExplorerVersion()[0] < 10) : true;
 };
 
 /**
@@ -157,9 +155,12 @@ ApplicationViewModel.prototype.start = function(options) {
 
     var that = this;
     return loadJson(options.configUrl).then(function(config) {
-        corsProxy.proxyDomains.push.apply(corsProxy.proxyDomains, config.proxyDomains);
-				corsProxy.setProxyHost(config.corsProxyHost);
-				appProxy.setProxyHost(config.proxyHost);
+				that.nmConfig = config.nationalmap;
+        corsProxy.proxyDomains.push.apply(corsProxy.proxyDomains, that.nmConfig.proxyDomains);
+				corsProxy.setProxyHost(that.nmConfig.corsProxyHost);
+    		// IE versions prior to 10 don't support CORS, so always use the proxy.
+				corsProxy.alwaysUseProxy = FeatureDetection.isInternetExplorer() ? (FeatureDetection.internetExplorerVersion()[0] < 10) : (that.nmConfig.disableCorsProxy !== "true");
+				appProxy.setProxyHost(that.nmConfig.proxyHost);
 
         if (defined(options.initializationUrl)) {
             that.initSources.push(options.initializationUrl);
