@@ -1,6 +1,6 @@
 
-National Map Embedded in GeoNetwork
-===================================
+National Map Embedded in GeoNetwork (ANZMEST 2.10.x)
+====================================================
 
 This is the NICTA National Map project embedded in GeoNetwork (ANZMEST). It replaces the (rather 
 dated and somewhat tired) extjs open layers map interface with a 3D gfx globe interface
@@ -8,17 +8,10 @@ that uses webGL and provides access to many basic web map data layers in Austral
 
 National map consists of:
 
-- a server side (varnish and a server side js interface) for retrieving and caching map tiles, and;
-- a client side (js) which is embedded in GeoNetwork 2.10.4 and appears in the 'Map' tab
+- a client side (js) which is embedded in GeoNetwork 2.10.4 and appears in the 'Map' tab, and;
+- a server side (varnish and a server side js interface) for retrieving and caching map tiles
 
-To run national map you need to be using Linux as the server side uses varnish and is started using
-a shell script. You may be able to get it working under windows but you would need to do that 
-manually.
-
-Basic installation instructions for ANZMEST GeoNetwork 2.10.4 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Assuming you've already installed anzmest!
+Assuming you've already installed anzmest, here is what you need to know in order to get the nationalmap client and server side going:
 
 Client side
 -----------
