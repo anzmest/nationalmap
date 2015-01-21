@@ -551,7 +551,9 @@ AusGlobeViewer.prototype._createCesiumViewer = function(container) {
 		var imageryProvider;
 
 		if (baseLayer.type === "wms" && baseLayer.options) {
-        imageryProvider = new WebMapServiceImageryProvider(baseLayer.options);
+				var wmsOpts = baseLayer.options;
+				wmsOpts.proxy = this.application.appProxy;
+        imageryProvider = new WebMapServiceImageryProvider(wmsOpts);
 		} else if (baseLayer.type === "bing" && baseLayer.options) {
 				var opts = baseLayer.options;
 				opts.mapStyle = BingMapsStyle.AERIAL_WITH_LABELS;
