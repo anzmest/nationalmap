@@ -156,10 +156,14 @@ ApplicationViewModel.prototype.start = function(options) {
     var that = this;
     return loadJson(options.configUrl).then(function(config) {
 				that.nmConfig = config.nationalmap;
-        corsProxy.proxyDomains.push.apply(corsProxy.proxyDomains, that.nmConfig.proxyDomains);
+        corsProxy.corsDomains.push.apply(corsProxy.corsDomains, that.nmConfig.corsDomains);
 				corsProxy.setProxyHost(that.nmConfig.corsProxyHost);
     		// IE versions prior to 10 don't support CORS, so always use the proxy.
-				corsProxy.alwaysUseProxy = FeatureDetection.isInternetExplorer() ? (FeatureDetection.internetExplorerVersion()[0] < 10) : (that.nmConfig.disableCorsProxy !== "true");
+				if (FeatureDetection.isInternetExplorer()) {
+					corsProxy.useProxy = (FeatureDetection.internetExplorerVersion()[0] < 10);
+				} else {
+					corsProxy.useProxy = (that.nmConfig.disableCorsProxy !== "true");
+				}
 				appProxy.setProxyHost(that.nmConfig.proxyHost);
 
         if (defined(options.initializationUrl)) {

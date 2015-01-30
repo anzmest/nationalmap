@@ -11,9 +11,8 @@ var corsProxy = {
         var flag = (proxyFlag === undefined) ? '' : '_' + proxyFlag + '/';
         return corsProxyHost + '/proxy/' + flag + resource;
     },
-    proxyDomains : [],
     corsDomains : [],
-    alwaysUseProxy : false,
+    useProxy : false,
 		setProxyHost : function(proxyHost) {
 			corsProxyHost = proxyHost;
 		}
@@ -22,18 +21,10 @@ var corsProxy = {
 corsProxy.shouldUseProxy = function(url) {
     var uri = new URI(url);
     var host = uri.host();
-    var proxyAvail = proxyAllowedHost(host, corsProxy.proxyDomains);
-    var corsAvail = !corsProxy.alwaysUseProxy && proxyAllowedHost(host, corsProxy.corsDomains);
-
-    if (proxyAvail && !corsAvail) {
-//        console.log('PROXY:', host);
-        return true;
-    }
-//    console.log('CORS:', host);
-    return false;
+    return (corsProxy.useProxy && proxyAllowedHost(host, corsProxy.corsDomains));
 };
 
-//Non CORS hosts we proxy to
+// Check host against the list supplied in domains
 function proxyAllowedHost(host, domains) {
     if (!defined(domains)) {
         return false;
