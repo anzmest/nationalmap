@@ -22,7 +22,7 @@ Client side
 
 *corsProxyHost*
 
-The corsProxy host (corsProxyHost setting - default localhost:3001) is the hostname and address of the national map server side. You should try to access as many web map servers as possible through the national map server side because it caches the web map images and tiles and uses a fast multithreaded proxy server (varnish). This can make rendering web maps much faster and should reduce the load on the web map servers you are using. However, at present the nationalmap server side is only supported on Linux so you should disable the corsProxy module of nationalmap by setting *disableCorsProxy* to "true" if you run GeoNetwork on a windows server.
+The corsProxy host (corsProxyHost setting - default localhost:3001) is the hostname and address of the national map server side. You should try to access as many web map servers as possible through the national map server side because it caches the web map images and tiles and uses a fast multithreaded proxy server (varnish). This can make rendering web maps much faster and should reduce the load on the web map servers you are using. By default, the nationalmap server side is disabled as varnish may not be present on your system. If you want to use it set *disableCorsProxy* to "false".
 
 *proxyHost*
 
@@ -49,7 +49,10 @@ application:
 
 *webapps/geonetwork/apps/nationalmap (or web/geonetwork/apps/nationalmap for jetty)*
 
-- to start the national map server side, execute the script run_server.sh using the port number you configured for the client side.
+- to start the national map server side:
+
+#. Install varnish, the http accelerator daemon (eg. on ubuntu: apt-get install varnish)
+#. Execute the script run_server.sh (in the directory above) using the port number you configured for the client side.
 
 It is possible to run the nationalmap server side outside of the directory in which it is installed
 GeoNetwork. If you want to do this then you will need to copy the nationalmap directory out of the 
