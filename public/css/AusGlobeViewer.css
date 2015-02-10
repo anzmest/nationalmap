@@ -837,6 +837,7 @@ a.ausglobe-title-menuItem:hover {
 }
 
 .ausglobe-user-service-form {
+		display: block;
     position: relative;
     padding: 10px;
     width: 320px;
