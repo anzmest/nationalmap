@@ -4,7 +4,7 @@
 var CesiumEvent = require('../../third_party/cesium/Source/Core/Event');
 var Clock = require('../../third_party/cesium/Source/Core/Clock');
 var DataSourceCollection = require('../../third_party/cesium/Source/DataSources/DataSourceCollection');
-var defaultValue = require('../../third_party/cesium/Source/Core/defaultValue');
+//var defaultValue = require('../../third_party/cesium/Source/Core/defaultValue');
 var defined = require('../../third_party/cesium/Source/Core/defined');
 var FeatureDetection = require('../../third_party/cesium/Source/Core/FeatureDetection');
 var knockout = require('../../third_party/cesium/Source/ThirdParty/knockout');
@@ -151,7 +151,7 @@ var ApplicationViewModel = function() {
  *                                                                   will be loaded as the init source.  For example, #vic will load init_vic.json.
  */
 ApplicationViewModel.prototype.start = function(options) {
-    var applicationUrl = defaultValue(options.applicationUrl, '');
+//    var applicationUrl = defaultValue(options.applicationUrl, '');
 
     var that = this;
     return loadJson(options.configUrl).then(function(config) {
@@ -170,7 +170,9 @@ ApplicationViewModel.prototype.start = function(options) {
             that.initSources.push(options.initializationUrl);
         }
 
-        return that.updateApplicationUrl(applicationUrl);
+// Skip hash URL processing - can become confused with GeoNetworks needs to handle # in URL
+//      return that.updateApplicationUrl(applicationUrl);
+        return loadInitSources(that, that.initSources);
     });
 };
 
