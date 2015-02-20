@@ -48,7 +48,7 @@ if (start) {
     var AusGlobeViewer = require('./viewer/AusGlobeViewer');
     var ApplicationViewModel = require('./ViewModels/ApplicationViewModel');
     var KnockoutSanitizedHtmlBinding = require('./viewer/KnockoutSanitizedHtmlBinding');
-    var raiseErrorToUser = require('./ViewModels/raiseErrorToUser');
+    //var raiseErrorToUser = require('./ViewModels/raiseErrorToUser');
     var registerCatalogViewModels = require('./ViewModels/registerCatalogViewModels');
 
     SvgPathBindingHandler.register(knockout);
@@ -81,9 +81,9 @@ if (start) {
         configUrl: '../../srv/eng/info@json?&type=config',  // geonetwork service
         initializationUrl: '../../apps/nationalmap/public/init_nm.json',
         useUrlHashAsInitSource: true
-    }).otherwise(function(e) {
-				console.log(JSON.stringify(e));
-        raiseErrorToUser(application, e);
+    //}).otherwise(function(e) {
+				//console.log(JSON.stringify(e));
+        //raiseErrorToUser(application, e);
     }).always(function() {
         // Watch the hash portion of the URL.  If it changes, try to interpret as an init source.
         window.addEventListener("hashchange", function() {
