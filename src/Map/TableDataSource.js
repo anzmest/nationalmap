@@ -214,10 +214,10 @@ TableDataSource.prototype.czmlRecFromPoint = function (point) {
             "scale" : this.scale,
             "color" : { "rgba" : [255, 0, 0, 255] },
             "show" : [{
-                    "boolean" : false
+                    "bool" : false
                 }, {
                 "interval" : "2011-02-04T16:00:00Z/2011-04-04T18:00:00Z",
-                "boolean" : true
+                "bool" : true
             }]
         },
         "position" : {
@@ -238,7 +238,7 @@ TableDataSource.prototype.czmlRecFromPoint = function (point) {
         rec.availability = rec.billboard.show[1].interval;
     }
     else {
-        rec.billboard.show[0].boolean = true;
+        rec.billboard.show[0].bool = true;
         rec.billboard.show[1].interval = undefined;
     }
     return rec;

@@ -34,7 +34,7 @@ proj4_epsg = {
     'EPSG:20255' : '+proj=utm +zone=55 +south +ellps=aust_SA +units=m +no_defs',
     'EPSG:20256' : '+proj=utm +zone=56 +south +ellps=aust_SA +units=m +no_defs',
     'EPSG:20257' : '+proj=utm +zone=57 +south +ellps=aust_SA +units=m +no_defs',
-    'EPSG:20258' : '+proj=utm +zone=58 +south +ellps=aust_SA +units=m +no_defs',
+    'EPSG:20258' : '+proj=utm +zone=58 +south +ellps=aust_SA +units=m +no_defs'
 };
 
 

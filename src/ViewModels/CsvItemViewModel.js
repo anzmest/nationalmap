@@ -444,9 +444,9 @@ var regionWmsMap = {
         "name":"region_map:FID_SA2_2011_AUST",
         "regionProp": "SA2_MAIN11",
         "aliases": ['sa2']
-    },
+    }
 // COMMENTING OUT SA1: it works, but server performance is just too slow to be widely usable
-//    'SA1': {
+//  ,  'SA1': {
 //        "name":"region_map:FID_SA1_2011_AUST",
 //        "regionProp": "SA1_7DIG11",
 //        "aliases": ['sa1']
