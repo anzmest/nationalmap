@@ -35,7 +35,7 @@ if (start) {
         };
     }
 
-		var prefix = "../../apps/nationalmap/public/";
+		var prefix = "../../nationalmap/public/";
     window.CESIUM_BASE_URL = prefix + 'build/Cesium/';
     window.NATIONALMAP_URL = prefix;
 		window.ga = function() {}; // f'ing google analytics - avoid.....
@@ -77,9 +77,9 @@ if (start) {
 
     application.start({
         applicationUrl: window.location,
-        //configUrl: '../../apps/nationalmap/public/config.json', 
+        //configUrl: '../../nationalmap/public/config.json', 
         configUrl: '../../srv/eng/info@json?&type=config',  // geonetwork service
-        initializationUrl: '../../apps/nationalmap/public/init_nm.json',
+        initializationUrl: '../../nationalmap/public/init_nm.json',
         useUrlHashAsInitSource: true
     }).otherwise(function(e) {
 				console.log(JSON.stringify(e));
