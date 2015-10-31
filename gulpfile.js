@@ -116,8 +116,8 @@ gulp.task('copy-cesiumWorkerBootstrapper', function() {
 });
 
 gulp.task('concat-css', function() {
-		return gulp.src( ['public/build/Cesium/Widgets/widgets.css'])
-		    .pipe(concatCss("build/Cesium/Widgets/cesiumwidgetsbundle.css", { rebaseUrls: false }))
+		return gulp.src( ['public/build/Cesium/Widgets/widgets.css'], {base: 'Widgets'})
+		    .pipe(concatCss("build/Cesium/Widgets/cesiumwidgetsbundle.css"))
 				.pipe(gulp.dest('public/'));
 });
 
