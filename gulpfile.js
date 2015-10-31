@@ -19,6 +19,7 @@ var buffer = require('vinyl-buffer');
 var transform = require('vinyl-transform');
 var source = require('vinyl-source-stream');
 var watchify = require('watchify');
+var concatCss = require('gulp-concat-css');
 
 
 var appJSName = 'ausglobe.js';
@@ -84,7 +85,7 @@ gulp.task('docs', function(){
         }));
 });
 
-gulp.task('prepare-cesium', ['build-cesium', 'copy-cesium-assets', 'copy-cesiumWorkerBootstrapper']);
+gulp.task('prepare-cesium', ['build-cesium', 'copy-cesium-assets', 'copy-cesiumWorkerBootstrapper', 'concat-css']);
 
 gulp.task('build-cesium', function(cb) {
     return exec('"Tools/apache-ant-1.8.2/bin/ant" build', {
@@ -112,6 +113,12 @@ gulp.task('copy-cesium-assets', function() {
 gulp.task('copy-cesiumWorkerBootstrapper', function() {
     return gulp.src('src/cesiumWorkerBootstrapper.js')
         .pipe(gulp.dest('public/build/Cesium/Workers'));
+});
+
+gulp.task('concat-css', function() {
+		return gulp.src( ['public/build/Cesium/Widgets/widgets.css'])
+		    .pipe(concatCss("build/Cesium/Widgets/cesiumwidgetsbundle.css", { rebaseUrls: false }))
+				.pipe(gulp.dest('public/'));
 });
 
 gulp.task('default', ['lint', 'build']);
@@ -152,7 +159,6 @@ function bundle(name, bundler, minify, catchErrors) {
 
         // Write the finished product.
         .pipe(gulp.dest('public/build'));
-
     return result;
 }
 

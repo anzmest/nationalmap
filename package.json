@@ -28,6 +28,7 @@
     "glob-all": "^2.4.1",
     "gulp": "^3.8.0",
     "gulp-concat": "~2.2.0",
+		"gulp-concat-css": "2.2.0",
     "gulp-jasmine": "~0.2.0",
     "gulp-jsdoc": "^0.1.4",
     "gulp-jshint": "~1.6.1",
