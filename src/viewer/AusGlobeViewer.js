@@ -319,9 +319,7 @@ function changeViewer(viewer) {
         if (defined(application.leaflet)) {
             viewer.selectViewer(true);
         } else {
-            application.cesium.scene.globe.terrainProvider = new CesiumTerrainProvider({
-                url : '//cesiumjs.org/stk-terrain/tilesets/world/tiles'
-            });
+            application.cesium.scene.globe.terrainProvider = new CesiumTerrainProvider(application.nmConfig.terrainProvider.options);
         }
     } else if (newMode === ViewerMode.CesiumEllipsoid) {
         ga('send', 'event', 'mapSettings', 'switchViewer', 'Smooth 3D');
@@ -540,7 +538,7 @@ AusGlobeViewer.prototype._createCesiumViewer = function(container) {
 
 		if (!tOptions) { // use default
 			tOptions = {
-            url : '//cesiumjs.org/stk-terrain/tilesets/world/tiles'
+            url : '//assets.agi.com/stk-terrain/v1/tilesets/world/tiles'
 			};
 			console.log("WARNING: Couldn't find terrainProvider options in config, using "+tOptions.url);
 		}
