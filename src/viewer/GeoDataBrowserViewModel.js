@@ -331,9 +331,14 @@ and the file will not be uploaded or added to the map.')) {
     this._activateGNBlueMarble = createCommand(function() {
         ga('send', 'event', 'mapSettings', 'switchImagery', 'GN Blue Marble');
 
-        if (!that._viewer.isCesium()) { // really?
-            var message = 'This imagery layer is not yet supported in 2D mode.';
-            alert(message);
+        if (!that._viewer.isCesium()) {
+						that._viewer.mapBaseLayer = new L.tileLayer.wms("http://localhost:8080/geoserver/ows", {
+							layers: 'gn:world,gn:ne_50m_boundary_da,gn:ne_50m_boundary_lines_land,gn:ne_50m_coastline',
+							format: 'image/png',
+							transparent: 'false',
+							attribution: '© NASA'
+						});
+						that._viewer.map.addLayer(that._viewer.mapBaseLayer);
             return;
         }
         

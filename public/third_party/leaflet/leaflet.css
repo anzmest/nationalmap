@@ -21,6 +21,7 @@
 .leaflet-container {
 	overflow: hidden;
 	-ms-touch-action: none;
+	height: 800px;
 	}
 .leaflet-tile,
 .leaflet-marker-icon,
