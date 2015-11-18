@@ -248,6 +248,7 @@ and stability issues.'
 
     //catch problems 
     if (this.webGlSupported && !supportsWebgl()) {
+		    /*
         noWebGLMessage = new PopupMessage({
             container : document.body,
             title : 'WebGL not supported',
@@ -259,6 +260,7 @@ including the latest versions of <a href="http://www.google.com/chrome" target="
 <a href="http://www.microsoft.com/ie" target="_blank">Microsoft Internet Explorer</a>. \
 Your web browser does not appear to support WebGL, so you will see a limited, 2D-only experience.'
         });
+				*/
         this.webGlSupported = false;
     }
 
@@ -924,6 +926,8 @@ AusGlobeViewer.prototype.selectViewer = function(bCesium) {
         });
 
         this.geoDataBrowser.viewModel.map = map;
+
+				//map.invalidateSize();
     }
     else {
         if (defined(this.map)) {
