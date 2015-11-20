@@ -143,8 +143,8 @@ Variable.prototype.processTimeVar = function () {
             console.log('Trying swap of day and month in date strings');
             timeVar.vals = [];
             try {
-                for (var i = 0; i < vals.length; i++) {
-                    timeVar.vals[i] = parseFunc(_swapDateFormat(vals[i]));
+                for (var j = 0; j < vals.length; j++) {
+                    timeVar.vals[j] = parseFunc(_swapDateFormat(vals[j]));
                 }
                 bSuccess = true;
             }

@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright(c) 2012-2014 National ICT Australia Limited (NICTA).
